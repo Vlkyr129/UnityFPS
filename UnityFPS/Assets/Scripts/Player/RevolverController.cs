@@ -53,7 +53,7 @@ public class RevolverController : MonoBehaviour
 
         //Add tweening punch effect to barrel
         barrelEffect.transform.DORewind();
-        barrelEffect.transform.DOPunchScale(new Vector3(1, 0, .5f), .25f);
+        barrelEffect.transform.DOPunchScale(new UnityEngine.Vector3(1, 0, .5f), .25f);
 
         RaycastHit hit;
         if (Physics.Raycast(fpsCam.transform.position, fpsCam.transform.forward, out hit))
@@ -73,7 +73,7 @@ public class RevolverController : MonoBehaviour
     void NeedReloadPrompt()
     {
         ReloadEffect.transform.DORewind();
-        ReloadEffect.transform.DOPunchScale(new Vector3(.5f, 0, .25f), .25f);
+        ReloadEffect.transform.DOPunchScale(new UnityEngine.Vector3(.5f, 0, .25f), .25f);
     }
      
 }

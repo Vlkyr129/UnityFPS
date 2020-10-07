@@ -24,6 +24,6 @@ public class ViewControl : MonoBehaviour
         xRotation = Mathf.Clamp(xRotation, -60f, 80f);
 
         transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
-        playerBodyRotationControl.Rotate(Vector3.up * mouseX);
+        playerBodyRotationControl.Rotate(UnityEngine.Vector3.up * mouseX);
     }
 }

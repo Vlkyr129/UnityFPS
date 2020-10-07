@@ -1,87 +1,60 @@
-﻿
+﻿using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
 {
     [SerializeField]
     float health = 50f;
+    [SerializeField]
+    float pullRadius = 20f;
+    [SerializeField]
+    float shootRange = 12f;
+    [SerializeField]
+    float attackIntervals = 1.5f;
+    [SerializeField]
+    float moveSpeed = 5f;
+    [SerializeField]
+    float dropChance = .2f;
 
-    public NavMeshAgent agent;
-    public Transform player;
-    public LayerMask whatIsGround, whatIsPlayer;
+    bool alreadyAttacked = false;
 
-    //Patroling
-    public Vector3 walkPoint;
-    bool walkPointSet;
-    public float walkPointRange;
+    public GameObject potion;
+    public GameObject projectile;
+    Transform player;
 
-    //Attacking
-    public float attackIntervals;
-    bool alreadyAttacked;
-
-    //States
-    public float sightRange, attackRange;
-    public bool playerInSightRange, playerInAttackRange;
-
-    private void Awake()
+    private void Start()
     {
-        player = GameObject.Find("Player").transform;
-        agent = GetComponent<NavMeshAgent>();
+        player = GameObject.FindGameObjectWithTag("Player").transform;
     }
 
     private void Update()
     {
-        //Check if player is in sight and in range.
-        playerInSightRange = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-        playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-
-
-    }
-
-    //Enemy AI Behavior
-    void Patroling()
-    {
-        if (!walkPointSet)
+        float distanceFromPlayer = Vector3.Distance(player.position, transform.position);
+        if (distanceFromPlayer < pullRadius && distanceFromPlayer > shootRange)
         {
-            SearchWalkPoint();
+            transform.LookAt(player.position);
+            transform.position = Vector3.MoveTowards(this.transform.position, player.position, moveSpeed * Time.deltaTime);
         }
-
-        if (walkPointSet)
+        else if (distanceFromPlayer <= shootRange && !alreadyAttacked)
         {
-            agent.SetDestination(walkPoint);
-        }
+            Instantiate(projectile, transform.position, Quaternion.identity);
 
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
-
-        //Walk point reached
-        if(distanceToWalkPoint.magnitude < 1f)
-        {
-            walkPointSet = false;
+            //attack cooldown
+            alreadyAttacked = true;
+            Invoke(nameof(ResetAttack), attackIntervals);
         }
     }
-
-    void SearchWalkPoint()
+    void ResetAttack()
     {
-        float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        float randomX = Random.Range(-walkPointRange, walkPointRange);
-
-        walkPoint = new Vector3(transform.position.x + randomX, transform.position.y, transform.position.z + randomZ);
-
-        if(Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
-        {
-            walkPointSet = true;
-        }
+        alreadyAttacked = false;
     }
 
-    void ChasePlayer()
+    private void OnDrawGizmosSelected()
     {
-
-    }
-
-    void AttackPlayer()
-    {
-
+        Gizmos.color = Color.cyan;
+        Gizmos.DrawWireSphere(transform.position, pullRadius);
+        Gizmos.DrawWireSphere(transform.position, shootRange);
     }
 
     //Damaging the enemy
@@ -90,6 +63,10 @@ public class EnemyController : MonoBehaviour
         health -= damageTaken;
         if (health <= 0f)
         {
+            if(Random.Range(0f, 1f) <= dropChance)
+            {
+                Instantiate(potion, transform.position, Quaternion.identity);
+            }
             Destroy(gameObject);
         }
     }

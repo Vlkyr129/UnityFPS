@@ -9,13 +9,13 @@ public class Amnesia : MonoBehaviour
     float maxTimeRewind = 5; 
     bool isRewinding = false;
 
-    List<PointInTime> pointsInTime;
+    List<pointInTime> pastPositions;
 
     Rigidbody rb;
 
     private void Start()
     {
-        pointsInTime = new List<PointInTime>();
+        pastPositions = new List<pointInTime>();
         rb = GetComponent<Rigidbody>();
     }
 
@@ -34,12 +34,11 @@ public class Amnesia : MonoBehaviour
         {
             rb.isKinematic = true;
 
-            if (pointsInTime.Count > 0)
+            if (pastPositions.Count > 0)
             {
-                PointInTime pointInTime = pointsInTime[0];
+                pointInTime pointInTime = pastPositions[0];
                 transform.position = pointInTime.position;
-                transform.rotation = pointInTime.rotation;
-                pointsInTime.RemoveAt(0);
+                pastPositions.RemoveAt(0);
             }
             else
             {
@@ -50,11 +49,11 @@ public class Amnesia : MonoBehaviour
         {
             rb.isKinematic = false;
 
-            if (pointsInTime.Count > (maxTimeRewind / Time.fixedDeltaTime))
+            if (pastPositions.Count > (maxTimeRewind / Time.fixedDeltaTime))
             {
-                pointsInTime.RemoveAt(pointsInTime.Count - 1);
+                pastPositions.RemoveAt(pastPositions.Count - 1);
             }
-            pointsInTime.Insert(0, new PointInTime(transform.position, transform.rotation));
+            pastPositions.Insert(0, new pointInTime(transform.position));
         }
     }
 }

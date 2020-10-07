@@ -2,14 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PointInTime 
+public class pointInTime 
 {
-    public Vector3 position;
-    public Quaternion rotation;
-    public PointInTime (Vector3 _position, Quaternion _rotation)
+    public UnityEngine.Vector3 position;
+    public pointInTime (UnityEngine.Vector3 _position)
     {
         position = _position;
-        rotation = _rotation;
     }
 
 }

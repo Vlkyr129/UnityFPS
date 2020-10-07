@@ -10,7 +10,7 @@ public class DotweemBarrel : MonoBehaviour
         if (Input.GetButtonDown("Fire1"))
         {
             transform.DORewind();
-            transform.DOPunchScale(new Vector3 (1, 0, .5f), .25f);
+            transform.DOPunchScale(new UnityEngine.Vector3 (1, 0, .5f), .25f);
         }
     }
  
