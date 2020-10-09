@@ -5,7 +5,7 @@ using UnityEngine;
 public class SmallHealthPotion : MonoBehaviour
 {
     [SerializeField]
-    float healPlayerAmount;
+    float healPlayerAmount = 20f;
 
     private void Update()
     {

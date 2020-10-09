@@ -67,6 +67,8 @@ public class EnemyController : MonoBehaviour
             {
                 Instantiate(potion, transform.position, Quaternion.identity);
             }
+
+            GameManager.highScore++;
             Destroy(gameObject);
         }
     }

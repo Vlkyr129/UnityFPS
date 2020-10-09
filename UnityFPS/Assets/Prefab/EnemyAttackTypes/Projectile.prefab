@@ -127,3 +127,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileSpeed: 400
   decayTime: 6
+  damage: 10

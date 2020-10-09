@@ -7,7 +7,8 @@ public class RevolverController : MonoBehaviour
     public Camera fpsCam;
     public GameObject impactEffect;
     public GameObject barrelEffect;
-    public GameObject ReloadEffect;
+    public GameObject needReloadEffect;
+    public GameObject reloadEffect;
 
     [Header("Gun Characteristics")]
     [SerializeField]
@@ -16,8 +17,6 @@ public class RevolverController : MonoBehaviour
     int maxAmmo = 7;
     [SerializeField]
     int currentAmmo;
-    [SerializeField]
-    float releodTime = 5f;
 
     private void Start()
     {
@@ -29,6 +28,8 @@ public class RevolverController : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.R))
         {
             currentAmmo = maxAmmo;
+            reloadEffect.transform.DORewind();
+            reloadEffect.transform.DOPunchScale(new UnityEngine.Vector3(.25f, 0, .25f), .25f);
         }
 
         if (Input.GetButtonDown("Fire1") && currentAmmo != 0)
@@ -72,8 +73,8 @@ public class RevolverController : MonoBehaviour
 
     void NeedReloadPrompt()
     {
-        ReloadEffect.transform.DORewind();
-        ReloadEffect.transform.DOPunchScale(new UnityEngine.Vector3(.5f, 0, .25f), .25f);
+        needReloadEffect.transform.DORewind();
+        needReloadEffect.transform.DOPunchScale(new UnityEngine.Vector3(.5f, 0, .25f), .25f);
     }
      
 }

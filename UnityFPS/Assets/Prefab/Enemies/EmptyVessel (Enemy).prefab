@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 5286092143375865940}
   - component: {fileID: 5286092143375865961}
   - component: {fileID: 5286092143375865960}
-  - component: {fileID: 5286092143375865966}
   m_Layer: 0
   m_Name: EmptyVessel (Enemy)
   m_TagString: Enemy
@@ -128,23 +127,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 50
-  pullRadius: 30
-  shootRange: 15
+  pullRadius: 40
+  shootRange: 20
   attackIntervals: 1.5
   moveSpeed: 5
   dropChance: 0.2
   potion: {fileID: 3220956940657892819, guid: cd133c7a777437147b60d72a1a588603, type: 3}
   projectile: {fileID: 2881188247525664289, guid: 29ec2eda77f506d4abefc454a73f8936, type: 3}
---- !u!114 &5286092143375865966
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5286092143375865943}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c9b001279b36c3444b45afb3acd7b432, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  maxTimeRewind: 5

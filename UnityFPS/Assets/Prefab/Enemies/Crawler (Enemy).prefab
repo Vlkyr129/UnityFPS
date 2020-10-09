@@ -126,10 +126,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   health: 10
-  pullRadius: 30
+  pullRadius: 60
   shootRange: 3
   attackIntervals: 1
-  moveSpeed: 12
+  moveSpeed: 8
   dropChance: 0
   potion: {fileID: 3220956940657892819, guid: cd133c7a777437147b60d72a1a588603, type: 3}
   projectile: {fileID: 8919478645168643250, guid: 71d4beb124f8698428284afea2a6998c, type: 3}

@@ -11,9 +11,9 @@ public class EnemyProjectile : MonoBehaviour
     [SerializeField]
     float damage = 10;
 
+    public static bool playerRangedHit = false;
+
     GameObject target;
-    
-    
 
     private void Start()
     {
@@ -30,6 +30,7 @@ public class EnemyProjectile : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
+            playerRangedHit = true;
             PlayerStates.playerHealth -= damage;
             Destroy(this.gameObject);
         }
